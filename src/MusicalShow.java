@@ -1,6 +1,6 @@
 class MusicalShow extends Show {
-    protected String musicAuthor;
-    protected String librettoText;
+    private final String musicAuthor;
+    private final  String librettoText;
 
     public MusicalShow(String title, int duration, Director director, String musicAuthor, String librettoText) {
         super(title, duration, director);
@@ -9,6 +9,6 @@ class MusicalShow extends Show {
     }
 
     public void printLibretto() {
-        System.out.println("Либретто '" + title + "': " + librettoText);
+        System.out.println("Либретто '" + title + "' (композитор: " + musicAuthor + "): " + librettoText);
     }
 }

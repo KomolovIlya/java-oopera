@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-class Show {
-    protected String title;
-    protected int duration;
-    protected Director director;
-    protected ArrayList<Actor> listOfActors = new ArrayList<>();
+public class Show {
+    protected final String title;
+    protected final int duration;
+    protected final Director director;
+    protected final ArrayList<Actor> listOfActors = new ArrayList<>();
 
     public Show(String title, int duration, Director director) {
         this.title = title;
@@ -21,16 +21,23 @@ class Show {
     }
 
     public void replaceActor(String oldSurname, Actor newActor) {
-        boolean found = false;
+        int count = 0;
+        int indexToReplace = -1;
+
         for (int i = 0; i < listOfActors.size(); i++) {
             if (listOfActors.get(i).getSurname().equals(oldSurname)) {
-                listOfActors.set(i, newActor);
-                found = true;
-                break;
+                count++;
+                indexToReplace = i;
             }
         }
-        if (!found) {
+
+        if (count == 0) {
             System.out.println("Ошибка: Актер с фамилией " + oldSurname + " не найден в спектакле '" + title + "'.");
+        } else if (count > 1) {
+            System.out.println("Ошибка: Найдено несколько актеров с фамилией " + oldSurname + ". Замена не выполнена.");
+        } else {
+            listOfActors.set(indexToReplace, newActor);
+            System.out.println("Актер с фамилией " + oldSurname + " успешно заменен на " + newActor.getSurname() + ".");
         }
     }
 
